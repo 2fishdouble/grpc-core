@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "fc.grpc.proto";
+option java_outer_classname = "CalculatorProto";
+
+package calculator;
+
+// 外部远端服务：本项目作为 Client 去调用它
+service CalculatorService {
+  rpc Add (CalcRequest) returns (CalcReply) {}
+  rpc Multiply (CalcRequest) returns (CalcReply) {}
+}
+
+message CalcRequest {
+  int32 a = 1;
+  int32 b = 2;
+}
+
+message CalcReply {
+  int32 result = 1;
+  string expression = 2;
+}
