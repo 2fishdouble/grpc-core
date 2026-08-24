@@ -5,7 +5,7 @@ import fc.grpc.proto.HelloReply;
 import fc.grpc.proto.HelloRequest;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
-import net.devh.boot.grpc.server.service.GrpcService;
+import org.springframework.grpc.server.service.GrpcService;
 
 import java.time.Instant;
 

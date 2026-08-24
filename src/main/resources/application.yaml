@@ -1,6 +1,26 @@
 spring:
   application:
     name: grpc
+  grpc:
+    # ==========================================
+    # Server 角色：本进程作为 gRPC Server，对外暴露服务
+    #   - GreeterService    (greeter.proto)
+    #   - CalculatorService (calculator.proto，仅演示，生产环境应独立部署)
+    # ==========================================
+    server:
+      port: 9090
+
+    # ==========================================
+    # Client 角色：本进程作为 gRPC Client，调用外部服务
+    #
+    # external-calculator: 调用远端 CalculatorService
+    #   默认指向本机演示；生产环境改为真实外部地址:
+    #     target: static://real-calc-server:9090
+    # ==========================================
+    client:
+      channel:
+        external-calculator:
+          target: static://localhost:9091
 
 server:
   port: 8080
@@ -8,24 +28,3 @@ server:
 logging:
   level:
     fc.grpc: DEBUG
-
-grpc:
-  # ==========================================
-  # Server 角色：本进程作为 gRPC Server，对外暴露服务
-  #   - GreeterService    (greeter.proto)
-  #   - CalculatorService (calculator.proto，仅演示，生产环境应独立部署)
-  # ==========================================
-  server:
-    port: 9090
-
-  # ==========================================
-  # Client 角色：本进程作为 gRPC Client，调用外部服务
-  #
-  # external-calculator: 调用远端 CalculatorService
-  #   默认指向本机演示；生产环境改为真实外部地址:
-  #     address: static://real-calc-server:9090
-  # ==========================================
-  client:
-    external-calculator:
-      address: static://localhost:9091
-      negotiation-type: plaintext
