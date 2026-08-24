@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.grpc.client.ImportGrpcClients;
 
 @SpringBootApplication
-@ImportGrpcClients(target = "external-calculator",
+@ImportGrpcClients(target = "calculator",
         types = CalculatorServiceGrpc.CalculatorServiceBlockingStub.class)
 public class GrpcApplication {
 

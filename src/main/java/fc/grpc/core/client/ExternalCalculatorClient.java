@@ -8,8 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
- * Client 角色：调用外部远程 gRPC 服务（非本进程）
- * 连接地址见 application.yaml 中 spring.grpc.client.channel.external-calculator
+ * Client 角色：通过 gRPC 调用 CalculatorService
+ * 演示时指向本进程自建的 Server，连接地址见 application.yaml 中 spring.grpc.client.channel.calculator
  * stub 由 GrpcApplication 上的 @ImportGrpcClients 注册为 Bean
  */
 @Slf4j
