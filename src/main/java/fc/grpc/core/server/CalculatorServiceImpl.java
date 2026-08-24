@@ -5,11 +5,16 @@ import fc.grpc.proto.CalcRequest;
 import fc.grpc.proto.CalculatorServiceGrpc;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.grpc.server.autoconfigure.GrpcServerAutoConfiguration;
+import org.springframework.grpc.server.NettyGrpcServerFactory;
+import org.springframework.grpc.server.exception.GrpcExceptionHandlerInterceptor;
+import org.springframework.grpc.server.lifecycle.GrpcServerLifecycle;
 import org.springframework.grpc.server.service.GrpcService;
 
 /**
- * CalculatorService 的 Spring Boot 托管实现
- * 与 GreeterService 一样由 spring-boot-starter-grpc-server 注册，监听 9090
+ * @see GrpcServerAutoConfiguration
+ * @see GrpcServerLifecycle
+ * @see GrpcExceptionHandlerInterceptor
  */
 @Slf4j
 @GrpcService
