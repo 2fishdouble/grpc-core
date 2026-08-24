@@ -15,7 +15,7 @@ public class GreeterServiceImpl extends GreeterServiceGrpc.GreeterServiceImplBas
 
     @Override
     public void sayHello(HelloRequest request, StreamObserver<HelloReply> responseObserver) {
-        log.info("Unary SayHello: name={}, message={}", request.getName(), request.getMessage());
+        log.info("Server Unary SayHello: name={}, message={}", request.getName(), request.getMessage());
         HelloReply reply = HelloReply.newBuilder()
                 .setMessage("Hello " + request.getName() + "! Your message: " + request.getMessage())
                 .setTimestamp(Instant.now().toEpochMilli())
@@ -26,7 +26,7 @@ public class GreeterServiceImpl extends GreeterServiceGrpc.GreeterServiceImplBas
 
     @Override
     public void sayHelloServerStream(HelloRequest request, StreamObserver<HelloReply> responseObserver) {
-        log.info("ServerStream SayHello: name={}, message={}", request.getName(), request.getMessage());
+        log.info("Server ServerStream SayHello: name={}, message={}", request.getName(), request.getMessage());
         for (int i = 0; i < 5; i++) {
             HelloReply reply = HelloReply.newBuilder()
                     .setMessage("Hello " + request.getName() + "! [stream #" + (i + 1) + "] " + request.getMessage())
@@ -51,7 +51,7 @@ public class GreeterServiceImpl extends GreeterServiceGrpc.GreeterServiceImplBas
 
             @Override
             public void onNext(HelloRequest request) {
-                log.info("ClientStream onNext: name={}, message={}", request.getName(), request.getMessage());
+                log.info("Server ClientStream onNext: name={}, message={}", request.getName(), request.getMessage());
                 clientName = request.getName();
                 allMessages.append(request.getMessage()).append("; ");
             }
@@ -63,7 +63,7 @@ public class GreeterServiceImpl extends GreeterServiceGrpc.GreeterServiceImplBas
 
             @Override
             public void onCompleted() {
-                log.info("ClientStream completed, collected {} messages", allMessages.length());
+                log.info("Server ClientStream completed, collected {} messages", allMessages.length());
                 HelloReply reply = HelloReply.newBuilder()
                         .setMessage("Hello " + clientName + "! Collected messages: " + allMessages)
                         .setTimestamp(Instant.now().toEpochMilli())
@@ -79,7 +79,7 @@ public class GreeterServiceImpl extends GreeterServiceGrpc.GreeterServiceImplBas
         return new StreamObserver<>() {
             @Override
             public void onNext(HelloRequest request) {
-                log.info("BidiStream onNext: name={}, message={}", request.getName(), request.getMessage());
+                log.info("Server BidiStream onNext: name={}, message={}", request.getName(), request.getMessage());
                 HelloReply reply = HelloReply.newBuilder()
                         .setMessage("Echo to " + request.getName() + ": " + request.getMessage())
                         .setTimestamp(Instant.now().toEpochMilli())
@@ -94,7 +94,7 @@ public class GreeterServiceImpl extends GreeterServiceGrpc.GreeterServiceImplBas
 
             @Override
             public void onCompleted() {
-                log.info("BidiStream completed");
+                log.info("Server BidiStream completed");
                 responseObserver.onCompleted();
             }
         };

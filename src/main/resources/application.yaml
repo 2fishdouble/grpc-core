@@ -9,6 +9,11 @@ spring:
     # ==========================================
     server:
       port: 9090
+      keepalive:
+        time: 2h
+        timeout: 20s
+      shutdown:
+        grace-period: 30s
 
     # ==========================================
     # Client 角色：同一个进程也作为 gRPC Client 调用服务

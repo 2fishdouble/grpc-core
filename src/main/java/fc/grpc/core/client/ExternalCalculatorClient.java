@@ -21,15 +21,11 @@ public class ExternalCalculatorClient {
 
     public CalcReply add(int a, int b) {
         CalcRequest request = CalcRequest.newBuilder().setA(a).setB(b).build();
-        CalcReply reply = stub.add(request);
-        log.info("远程 Calculator.Add({}, {}) = {}", a, b, reply.getResult());
-        return reply;
+        return stub.add(request);
     }
 
     public CalcReply multiply(int a, int b) {
         CalcRequest request = CalcRequest.newBuilder().setA(a).setB(b).build();
-        CalcReply reply = stub.multiply(request);
-        log.info("远程 Calculator.Multiply({}, {}) = {}", a, b, reply.getResult());
-        return reply;
+        return stub.multiply(request);
     }
 }
